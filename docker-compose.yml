@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+  sql:
+    container_name: db.carmentis
+    image: postgres:15
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${SQL_ADMIN_USER:-postgres}
+      - POSTGRES_PASSWORD=${SQL_ADMIN_PASSWORD:-KVf3u7rGB9fW}
+    networks:
+      - carmentis_network
+
+  operator:
+    depends_on:
+      - sql
+    ports:
+      - "3005:3005"
+    image: ghcr.io/carmentis/operator.carmentis:latest
+    environment:
+      - WEB_DOMAIN=${WEB_DOMAIN:-carmentis.io}
+      - SQL_ADMIN_USER=${SQL_ADMIN_USER:-postgres}
+      - SQL_ADMIN_PASSWORD=${SQL_ADMIN_PASSWORD:-KVf3u7rGB9fW}
+      - SQL_HOST=${SQL_HOST:-sql}
+      - SQL_PORT=${SQL_PORT:-5432}
+      - DATABASE_URL=postgres://${SQL_ADMIN_USER:-postgres}:${SQL_ADMIN_PASSWORD:-KVf3u7rGB9fW}@${SQL_HOST:-sql}:${SQL_PORT:-5432}/carmentis_operator
+    container_name: operator.carmentis
+    restart: unless-stopped
+    working_dir: /carmentis
+    tty: true
+    volumes:
+      - ./.data/storage:/carmentis/app/operatorServer/storage
+    networks:
+      - carmentis_network
+
+networks:
+    carmentis_network:
+        driver: bridge
