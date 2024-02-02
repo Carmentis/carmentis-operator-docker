@@ -4,6 +4,10 @@ GIT_BRANCH="main"
 
 DOCKER_COMPOSE_FILE="./docker-compose.yml"
 
+start_app_alone() {
+    docker-compose -f $DOCKER_COMPOSE_FILE up -d --build operator
+}
+
 start_app() {
     docker-compose -f $DOCKER_COMPOSE_FILE up -d --build
 }
@@ -28,6 +32,9 @@ update() {
 case "$1" in
     start)
         start_app
+        ;;
+    start:alone)
+        start_app_alone
         ;;
     stop)
         stop_app
@@ -59,7 +66,7 @@ case "$1" in
         check_status
         ;;
     *)
-        echo "Usage: $0 {start|stop|restart|update|logs|status|reset:db}"
+        echo "Usage: $0 {start|start:alone|stop|restart|update|logs|status|reset:db}"
         exit 1
 esac
 

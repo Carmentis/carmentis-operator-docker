@@ -7,6 +7,11 @@ IF "%1"=="start" (
     GOTO End
 )
 
+IF "%1"=="start:alone" (
+    docker-compose -f %DOCKER_COMPOSE_FILE% up -d --build operator
+    GOTO End
+)
+
 IF "%1"=="stop" (
     docker-compose -f %DOCKER_COMPOSE_FILE% down
     GOTO End
@@ -50,7 +55,7 @@ IF "%1"=="status" (
 )
 
 :Usage
-echo Usage: %0 {start|stop|restart|update|logs|status|reset:db}
+echo Usage: %0 {start|start:alone|stop|restart|update|logs|status|reset:db}
 exit /b 1
 
 :End

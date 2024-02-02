@@ -16,8 +16,6 @@ services:
       - carmentis_network
 
   operator:
-    depends_on:
-      - db
     ports:
       - "3005:3005"
     image: ghcr.io/carmentis/operator.carmentis-amd64:latest
