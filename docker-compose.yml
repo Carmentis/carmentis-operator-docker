@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  sql:
+  db:
     container_name: db.carmentis
     image: postgres:15
     restart: unless-stopped
@@ -10,24 +10,28 @@ services:
     volumes:
       - ./.data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=${SQL_ADMIN_USER:-postgres}
-      - POSTGRES_PASSWORD=${SQL_ADMIN_PASSWORD:-KVf3u7rGB9fW}
+      - POSTGRES_USER=${CARMENTIS_OPERATOR_DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${CARMENTIS_OPERATOR_DB_PASSWORD:-KVf3u7rGB9fW}
     networks:
       - carmentis_network
 
   operator:
     depends_on:
-      - sql
+      - db
     ports:
       - "3005:3005"
-    image: ghcr.io/carmentis/operator.carmentis:latest
+    image: ghcr.io/carmentis/operator.carmentis-amd64:latest
     environment:
-      - WEB_DOMAIN=${WEB_DOMAIN:-carmentis.io}
-      - SQL_ADMIN_USER=${SQL_ADMIN_USER:-postgres}
-      - SQL_ADMIN_PASSWORD=${SQL_ADMIN_PASSWORD:-KVf3u7rGB9fW}
-      - SQL_HOST=${SQL_HOST:-sql}
-      - SQL_PORT=${SQL_PORT:-5432}
-      - DATABASE_URL=postgres://${SQL_ADMIN_USER:-postgres}:${SQL_ADMIN_PASSWORD:-KVf3u7rGB9fW}@${SQL_HOST:-sql}:${SQL_PORT:-5432}/carmentis_operator
+      - CARMENTIS_OPERATOR_STORAGE_DIR=${CARMENTIS_OPERATOR_STORAGE_DIR:-/carmentis/app/operatorServer/storage}
+      - CARMENTIS_OPERATOR_NODE_URL=${CARMENTIS_OPERATOR_NODE_URL:-https://mercurius.carmentis.io}
+      - CARMENTIS_OPERATOR_DATA_URL=${CARMENTIS_OPERATOR_DATA_URL:-https://themis.carmentiscan.io}
+      - CARMENTIS_OPERATOR_DB_USER=${CARMENTIS_OPERATOR_DB_USER:-postgres}
+      - CARMENTIS_OPERATOR_DB_PASSWORD=${CARMENTIS_OPERATOR_DB_PASSWORD:-KVf3u7rGB9fW}
+      - CARMENTIS_OPERATOR_DB_HOST=${CARMENTIS_OPERATOR_DB_HOST:-db}
+      - CARMENTIS_OPERATOR_DB_PORT=${CARMENTIS_OPERATOR_DB_PORT:-5432}
+      - CARMENTIS_OPERATOR_DB_DATABASE=${CARMENTIS_OPERATOR_DB_DATABASE:-carmentis_operator}
+      - CARMENTIS_OPERATOR_PORT=${CARMENTIS_OPERATOR_PORT:-3005}
+      - DATABASE_URL=postgres://${CARMENTIS_OPERATOR_DB_USER:-postgres}:${CARMENTIS_OPERATOR_DB_PASSWORD:-KVf3u7rGB9fW}@${CARMENTIS_OPERATOR_DB_HOST:-db}:${CARMENTIS_OPERATOR_DB_PORT:-5432}/${CARMENTIS_OPERATOR_DB_DATABASE:-carmentis_operator}
     container_name: operator.carmentis
     restart: unless-stopped
     working_dir: /carmentis

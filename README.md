@@ -2,15 +2,33 @@
 
 This document provides instructions on how to launch, manage, and interact with the Carmentis Operator Server using Docker and Docker Compose. Instructions are provided for both Unix and Windows operating systems.
 
+---
+**Note:** The Operator Server is currently in alpha and is not yet ready for production use. The Operator Server is currently only available for the Carmentis testnet.
+
+---
+
 ## Prerequisites
 
 Before proceeding, ensure you have the following installed:
 - Docker
 - Docker Compose
 
-## Setup
+## Installation
 
 Clone the repository and navigate to the directory where the `docker-compose.yml` file is located.
+
+## Configuration (coming soon)
+
+Create a `.env` file in the same directory as the `docker-compose.yml` file. This file is used to set environment variables for the application. 
+
+| Variable            | Description                                                  | Default Value                    |
+|---------------------|--------------------------------------------------------------|----------------------------------|
+| `WEB_DOMAIN`        | The domain name of the Carmentis webview for the proofpages. | `https://testnet.carmentis.io`   |
+| `NODE_URL`          | The URL of the Carmentis node.                               | `https://mercurius.carmentis.io` |
+| `DB_ADMIN_USER`     | The username of the internal database administrator.         | `postgres`                       |
+| `DB_ADMIN_PASSWORD` | The password of the internal database administrator.         | **********                       |
+| `DB_HOST`           | The hostname of the internal database.                       | `db`                             |
+| `DB_PORT`           | The port of the internal database.                           | `5432`                           |
 
 ## Managing the Application
 
@@ -44,7 +62,6 @@ Clone the repository and navigate to the directory where the `docker-compose.yml
 
 ## Additional Notes
 
-- Ensure all environment variables and configurations are set correctly in your `.env` file.
 - The .data/db directory is used to store the application's database files. This directory is created automatically when the application is started.
 - The .data/storage directory is used to store the application's storage files, and in particular the signing private key that you should take care to backup. This directory is created automatically when the application is started.
 - You can test your own operator with our swagger available on http://www.dev.carmentis.io:8080/
