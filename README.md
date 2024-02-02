@@ -17,18 +17,20 @@ Before proceeding, ensure you have the following installed:
 
 Clone the repository and navigate to the directory where the `docker-compose.yml` file is located.
 
-## Configuration (coming soon)
+## Configuration
 
 Create a `.env` file in the same directory as the `docker-compose.yml` file. This file is used to set environment variables for the application. 
 
-| Variable            | Description                                                  | Default Value                    |
-|---------------------|--------------------------------------------------------------|----------------------------------|
-| `WEB_DOMAIN`        | The domain name of the Carmentis webview for the proofpages. | `https://testnet.carmentis.io`   |
-| `NODE_URL`          | The URL of the Carmentis node.                               | `https://mercurius.carmentis.io` |
-| `DB_ADMIN_USER`     | The username of the internal database administrator.         | `postgres`                       |
-| `DB_ADMIN_PASSWORD` | The password of the internal database administrator.         | **********                       |
-| `DB_HOST`           | The hostname of the internal database.                       | `db`                             |
-| `DB_PORT`           | The port of the internal database.                           | `5432`                           |
+| Variable                         | Description                                         | Default Value                    |
+|----------------------------------|-----------------------------------------------------|----------------------------------|
+| `CARMENTIS_OPERATOR_DATA_URL`    | The URL of the Carmentis Explorer. | `https://themis.carmentis.io`    |
+| `CARMENTIS_OPERATOR_NODE_URL`    | The URL of the Carmentis node.                      | `https://mercurius.carmentis.io` |
+| `CARMENTIS_OPERATOR_DB_USER`     | The username of the internal database administrator. | `postgres`                       |
+| `CARMENTIS_OPERATOR_DB_PASSWORD` | The password of the internal database administrator. | **********                       |
+| `CARMENTIS_OPERATOR_DB_HOST`     | The hostname of the internal database.              | `db`                             |
+| `CARMENTIS_OPERATOR_DB_PORT`     | The port of the internal database.                  | `5432`                           |
+| `CARMENTIS_OPERATOR_DB_DATABASE` | The name of the internal database.                  | `carmentis_operator`             |
+
 
 ## Managing the Application
 
