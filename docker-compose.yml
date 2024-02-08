@@ -21,8 +21,8 @@ services:
     image: ghcr.io/carmentis/operator.carmentis-amd64:latest
     environment:
       - CARMENTIS_OPERATOR_STORAGE_DIR=/carmentis/app/operatorServer/storage
-      - CARMENTIS_OPERATOR_NODE_URL=${CARMENTIS_OPERATOR_NODE_URL:-https://mercurius.carmentis.io}
-      - CARMENTIS_OPERATOR_DATA_URL=${CARMENTIS_OPERATOR_DATA_URL:-https://themis.carmentiscan.io}
+      - CARMENTIS_OPERATOR_NODE_URL=${CARMENTIS_OPERATOR_NODE_URL:-https://testnode.carmentis.io}
+      - CARMENTIS_OPERATOR_DATA_URL=${CARMENTIS_OPERATOR_DATA_URL:-https://testnet.carmentiscan.io}
       - CARMENTIS_OPERATOR_DB_USER=${CARMENTIS_OPERATOR_DB_USER:-postgres}
       - CARMENTIS_OPERATOR_DB_PASSWORD=${CARMENTIS_OPERATOR_DB_PASSWORD:-KVf3u7rGB9fW}
       - CARMENTIS_OPERATOR_DB_HOST=${CARMENTIS_OPERATOR_DB_HOST:-db}
