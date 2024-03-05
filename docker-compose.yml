@@ -20,6 +20,8 @@ services:
       - "3005:3005"
     image: ghcr.io/carmentis/operator.carmentis-amd64:latest
     environment:
+      - CARMENTIS_OPERATOR_URL=${CARMENTIS_OPERATOR_URL:?Please set CARMENTIS_OPERATOR_URL}
+      - CARMENTIS_OPERATOR_PORT=${CARMENTIS_OPERATOR_PORT:-3005}
       - CARMENTIS_OPERATOR_STORAGE_DIR=/carmentis/app/operatorServer/storage
       - CARMENTIS_OPERATOR_NODE_URL=${CARMENTIS_OPERATOR_NODE_URL:-https://testnode.carmentis.io}
       - CARMENTIS_OPERATOR_DATA_URL=${CARMENTIS_OPERATOR_DATA_URL:-https://testnet.carmentiscan.io}
@@ -28,7 +30,6 @@ services:
       - CARMENTIS_OPERATOR_DB_HOST=${CARMENTIS_OPERATOR_DB_HOST:-db}
       - CARMENTIS_OPERATOR_DB_PORT=${CARMENTIS_OPERATOR_DB_PORT:-5432}
       - CARMENTIS_OPERATOR_DB_DATABASE=${CARMENTIS_OPERATOR_DB_DATABASE:-carmentis_operator}
-      - CARMENTIS_OPERATOR_PORT=${CARMENTIS_OPERATOR_PORT:-3005}
       - DATABASE_URL=postgres://${CARMENTIS_OPERATOR_DB_USER:-postgres}:${CARMENTIS_OPERATOR_DB_PASSWORD:-KVf3u7rGB9fW}@${CARMENTIS_OPERATOR_DB_HOST:-db}:${CARMENTIS_OPERATOR_DB_PORT:-5432}/${CARMENTIS_OPERATOR_DB_DATABASE:-carmentis_operator}
     container_name: operator.carmentis
     restart: unless-stopped
