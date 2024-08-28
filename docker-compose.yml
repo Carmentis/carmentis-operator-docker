@@ -18,7 +18,7 @@ services:
   operator:
     ports:
       - "3005:3005"
-    image: ghcr.io/carmentis/operator.carmentis-amd64:latest
+    image: ghcr.io/carmentis/operator.carmentis:latest
     environment:
       - CARMENTIS_OPERATOR_URL=${CARMENTIS_OPERATOR_URL:?Please set CARMENTIS_OPERATOR_URL}
       - CARMENTIS_OPERATOR_PORT=${CARMENTIS_OPERATOR_PORT:-3005}
