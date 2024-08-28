@@ -1,8 +1,8 @@
 version: "3.3"
 
 services:
-  db:
-    container_name: db.carmentis
+  db_data:
+    container_name: db-data.carmentis
     image: postgres:15
     restart: unless-stopped
     ports:
