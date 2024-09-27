@@ -16,6 +16,10 @@ services:
       - carmentis_network
 
   operator:
+    depends_on:
+      db:
+        condition: service_started
+        restart: true
     ports:
       - "3005:3005"
     image: ghcr.io/carmentis/operator.carmentis:latest
