@@ -9,19 +9,18 @@ start_app_alone() {
 }
 
 start_app() {
-    if [ ! -f ./.data/storage/key.txt ] ; then
-      # todo: Display URL to the documentation page about "how to have the user public key"
-      echo "Key file not found."
-      echo "The operator needs a public key. How to get it? https://docs.carmentis.io/how-to/deploy-operator"
-      echo "Please provide public user key: "
+    if [ ! -f ./.data/operator/admin-key.txt ] ; then
+      echo "The file 'admin-public-key.txt' holding the administrator public key was not found."
+      echo "See https://docs.carmentis.io/how-to/deploy-operator to learn more."
+      echo "Please provide the administrator public key: "
       read -r key
 
       # Todo: use a regex to validate the key given in input /^0(2|3)[a-f\d]{64}$/i
 
-      mkdir -p ./.data/storage
-      echo "$key" > ./.data/storage/key.txt
+      mkdir -p ./.data/operator
+      echo "$key" > ./.data/operator/admin-public-key.txt
 
-      echo "Key saved."
+      echo "Administrator public key saved."
     fi
     docker-compose -f $DOCKER_COMPOSE_FILE up -d --build
 }
