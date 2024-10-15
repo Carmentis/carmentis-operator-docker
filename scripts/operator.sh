@@ -9,7 +9,7 @@ start_app_alone() {
 }
 
 start_app() {
-    if [ ! -f ./.data/operator/admin-key.txt ] ; then
+    if [ ! -f ./.data/operator/admin-public-key.txt ] ; then
       echo "The file 'admin-public-key.txt' holding the administrator public key was not found."
       echo "See https://docs.carmentis.io/how-to/deploy-operator to learn more."
       echo "Please provide the administrator public key: "
