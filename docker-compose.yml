@@ -8,7 +8,7 @@ services:
     ports:
       - "${CARMENTIS_OPERATOR_DB_PORT:-5432}:${CARMENTIS_OPERATOR_DB_PORT:-5432}"
     volumes:
-      - ./.data/db:/var/lib/postgresql/data
+      - data-db-operator:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${CARMENTIS_OPERATOR_DB_USER:-postgres}
       - POSTGRES_PASSWORD=${CARMENTIS_OPERATOR_DB_PASSWORD:-KVf3u7rGB9fW}
@@ -39,10 +39,14 @@ services:
     working_dir: /carmentis
     tty: true
     volumes:
-      - ./.data/storage:/carmentis/app/operatorServer/storage
+      - ./.data/operator:/carmentis/app/operatorServer/storage
     networks:
       - carmentis_network
 
 networks:
     carmentis_network:
         driver: bridge
+volumes:
+  data-db-operator:
+    driver: local
+
