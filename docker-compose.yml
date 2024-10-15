@@ -10,9 +10,9 @@ services:
     volumes:
       - data-db-operator:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=${CARMENTIS_OPERATOR_DB_USER:-postgres}
       - POSTGRES_PASSWORD=${CARMENTIS_OPERATOR_DB_PASSWORD:-KVf3u7rGB9fW}
-      - POSTGRES_PORT=${CARMENTIS_OPERATOR_DB_PORT:-5432}
+      - PGUSER=${CARMENTIS_OPERATOR_DB_USER:-postgres}
+      - PGPORT=${CARMENTIS_OPERATOR_DB_PORT:-5432}
     networks:
       - carmentis_network
 
